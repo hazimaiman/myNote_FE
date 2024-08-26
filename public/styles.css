@@ -1,20 +1,23 @@
+/* Global styles */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
 html {
   font-family: "Montserrat", sans-serif;
 }
+
 body {
   background: #eee;
-  background-color: #25008a;
-background-image: url("https://www.transparenttextures.com/patterns/black-linen.png");
+  background-color: #dcdad2;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
   padding: 0 16px;
 }
 
 header {
-  background: linear-gradient(to right, #9D50BB, #6E48AA); 
   margin: auto -16px;
   text-align: center;
   padding: 16px 32px;
@@ -22,11 +25,10 @@ header {
 }
 
 header h1 {
-  color: #fff;
+  color: #333;
   font-family: "McLaren", cursive;
   font-weight: 200;
 }
-
 
 footer {
   position: absolute;
@@ -39,8 +41,10 @@ footer {
 footer p {
   color: #ccc;
 }
+
+/* Note styles */
 .note {
-  background: #fff;
+  background: #ffffff;
   border-radius: 7px;
   box-shadow: 0 2px 5px #ccc;
   padding: 10px;
@@ -48,10 +52,12 @@ footer p {
   margin: 16px;
   float: left;
 }
+
 .note h1 {
   font-size: 1.1em;
   margin-bottom: 6px;
 }
+
 .note p {
   font-size: 1.1em;
   margin-bottom: 10px;
@@ -59,7 +65,7 @@ footer p {
   word-wrap: break-word;
 }
 
-.note button {
+.note .delete-button {
   position: relative;
   float: right;
   margin-right: 10px;
@@ -67,10 +73,18 @@ footer p {
   border: none;
   width: 36px;
   height: 36px;
+  background: none;
   cursor: pointer;
   outline: none;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
+.note .delete-button:hover {
+  color: #ff7043;
+  transform: scale(1.1);
+}
+
+/* Form styles */
 form.create-note {
   position: relative;
   width: 480px;
@@ -80,6 +94,7 @@ form.create-note {
   border-radius: 7px;
   box-shadow: 0 1px 5px rgb(138, 137, 137);
 }
+
 form.create-note input,
 form.create-note textarea {
   width: 100%;
@@ -90,6 +105,7 @@ form.create-note textarea {
   font-family: inherit;
   resize: none;
 }
+
 form.create-note button {
   position: absolute;
   right: 18px;

@@ -3,17 +3,28 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
+import SignIn from "./SignIn"; // Make sure to create this component
 import axios from "axios";
 
 function App() {
   const [notes, setNotes] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
   // Fetch notes from the backend
   useEffect(() => {
-    axios.get("https://mynote-be.onrender.com/api/notes")
-      .then(response => setNotes(response.data))
-      .catch(error => console.error("Error fetching notes: ", error));
-  }, []);
+    if (isAuthenticated) {
+      axios.get("https://mynote-be.onrender.com/api/notes")
+        .then(response => setNotes(response.data))
+        .catch(error => console.error("Error fetching notes: ", error));
+    }
+  }, [isAuthenticated]);
+
+  // Handle sign in
+  const handleSignIn = (username) => {
+    setIsAuthenticated(true);
+    setUser(username);
+  };
 
   // Add a new note
   function addNote(newNote) {
@@ -33,9 +44,20 @@ function App() {
       .catch(error => console.error("Error deleting note: ", error));
   }
 
+  // Sign out function
+  const handleSignOut = () => {
+    setIsAuthenticated(false);
+    setUser(null);
+    setNotes([]);
+  };
+
+  if (!isAuthenticated) {
+    return <SignIn onSignIn={handleSignIn} />;
+  }
+
   return (
     <div>
-      <Header />
+      <Header username={user} onSignOut={handleSignOut} />
       <CreateArea onAdd={addNote} />
       {notes.map(noteItem => (
         <Note
